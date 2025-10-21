@@ -290,16 +290,24 @@ def render_category_section(category: Category) -> str:
     if not category.scripts:
         return heading + "> No scripts in this category yet. Add files and regenerate the README.\n"
 
-    table_header = "| Script | Summary | Supported OS | Remote Execution |\n| --- | --- | --- | --- |"
-    rows = []
+    sections = []
     for script in category.scripts:
         script_link = f"[`{script.name}`]({script.github_url})"
-        description = script.description.replace("|", "\\|")
+        description = script.description
         os_display = ", ".join(script.supported_os)
-        curl_cmd = f"`{script.remote_command}`"
-        rows.append(f"| {script_link} | {description} | {os_display} | {curl_cmd} |")
+        remote_command = script.remote_command
+        entry = textwrap.dedent(
+            f"""
+            ### {script_link}
 
-    return heading + "\n".join([table_header, *rows]) + "\n"
+            - **Summary:** {description}
+            - **Supported OS:** {os_display}
+            - **Remote Execution:** `{remote_command}`
+            """
+        ).strip()
+        sections.append(entry)
+
+    return heading + "\n\n".join(sections) + "\n"
 
 
 def build_readme(categories: List[Category]) -> str:

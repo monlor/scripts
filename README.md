@@ -8,9 +8,11 @@ Collection of personal automation scripts organized by category for quick discov
 - [network (1)](#network)
 
 ## network
-| Script | Summary | Supported OS | Remote Execution |
-| --- | --- | --- | --- |
-| [`china-ipset-update.sh`](https://github.com/monlor/scripts/blob/main/network/china-ipset-update.sh) | Update ipset entries for China mainland IPv4/IPv6 ranges. Safe to rerun. | Linux, OpenWrt | `curl -sSL https://raw.githubusercontent.com/monlor/scripts/main/network/china-ipset-update.sh | sh` |
+### [`china-ipset-update.sh`](https://github.com/monlor/scripts/blob/main/network/china-ipset-update.sh)
+
+- **Summary:** Update ipset entries for China mainland IPv4/IPv6 ranges. Safe to rerun.
+- **Supported OS:** Linux, OpenWrt
+- **Remote Execution:** `curl -sSL https://raw.githubusercontent.com/monlor/scripts/main/network/china-ipset-update.sh | sh`
 
 
 ## Maintenance
