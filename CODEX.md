@@ -23,6 +23,7 @@ This repository hosts a personal catalog of reusable automation scripts. The not
 ## Remote Execution Notes
 - Remote commands use `curl -sSL <url> | <interpreter>` and automatically pick `sh`, `bash`, or other runtimes based on each script's shebang. Adjust manually if a different invocation is required.
 - Verify external download URLs before committing changes to avoid supply-chain risks.
+- When documenting GitHub downloads, provide the plain command first and note that users can opt into `${GH_PROXY:-}` prefixes (for example, suggest `export GH_PROXY=https://gh.monlor.com/` before running accelerated downloads).
 - Provide flags or environment variables for user-specific configuration where feasible.
 
 ## Quality Checklist
