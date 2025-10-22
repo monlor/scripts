@@ -52,7 +52,8 @@ class ScriptInfo:
     @property
     def remote_command(self) -> str:
         script_path = self.relative_path.as_posix()
-        return f"curl -sSL {RAW_BASE_URL}/{script_path} | {self.executor}"
+        remote_url = f"{RAW_BASE_URL}/{script_path}"
+        return f"curl -sSL \"{remote_url}\" | {self.executor}"
 
 
 @dataclass
@@ -337,13 +338,15 @@ Collection of personal automation scripts organized by category for quick discov
 - Add a comment line such as "Supports: Linux, OpenWrt" to enumerate compatible operating systems (defaults to Linux when omitted).
 - Export script parameters with safe defaults so commands can run non-interactively; document overrides in the script usage output when applicable.
 - Remote execution commands automatically select interpreters based on each script's shebang; adjust manually if special tooling is required.
+- Set the `GH_PROXY` environment variable (for example, `export GH_PROXY=https://gh.monlor.com/`) and manually prefix commands as `${{GH_PROXY:-}}<github-url>` when you need GitHub download acceleration.
 - Regenerate this document with `python tools/update_readme.py`; avoid manual edits to the generated sections.
 
 ## Contribution
 
 - Clone the repository: `git clone https://github.com/{REPO_SLUG}.git`
 - Regenerate the index after adding scripts: `python tools/update_readme.py`
-- Remote execution example: `curl -sSL {RAW_BASE_URL}/path/to/script.sh | sh`
+- Remote execution example: `curl -sSL "{RAW_BASE_URL}/path/to/script.sh" | sh`
+- Need acceleration? Prefix manually: ``GH_PROXY=https://gh.monlor.com/ curl -sSL "${{GH_PROXY:-}}{RAW_BASE_URL}/path/to/script.sh" | sh``
 - Describe your script by placing a concise comment on the first non-empty line (for example, `# Sync router IP list`).
 - Declare supported systems with a comment such as `# Supports: Linux, OpenWrt`; omit to default to Linux only.
 """
